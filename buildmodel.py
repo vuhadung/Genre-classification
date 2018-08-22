@@ -75,7 +75,7 @@ def createModel():
 
     # Load data
     data = []
-    with open("data", 'r') as f:
+    with open("data", 'rb') as f:
         content = f.read()
         data = pickle.loads(content)
     data = np.asarray(data)
@@ -83,7 +83,7 @@ def createModel():
     data = data.reshape((data.shape[0], n_input))
 
     labels = []
-    with open("labels", 'r') as f:
+    with open("labels", 'rb') as f:
         content = f.read()
         labels = pickle.loads(content)
 
@@ -137,7 +137,7 @@ def createModel():
     pred = conv_net(x, weights, biases, keep_prob)
 
     # Define loss and optimizer
-    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(pred, y))
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=pred, logits=y))
     optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
     # Evaluate model
@@ -167,7 +167,7 @@ def createModel():
                 loss = sess.run(cost, feed_dict={x: batch_xs, y: batch_ys, keep_prob: 1.})
                 print("Iter " + str(step * batch_size) + ", Minibatch Loss= " + "{:.6f}".format(loss) + ", Training Accuracy= " + "{:.5f}".format(acc))
 
-                save_path = saver.save(sess, "model.ckpt")
+                save_path = saver.save(sess, "..\Genre classification\model.ckpt")
                 print("Model saved in file: %s" % save_path)
             step += 1
         print("Optimization Finished!")
@@ -177,3 +177,7 @@ def createModel():
 
         # Calculate accuracy
         print("Testing Accuracy:", sess.run(accuracy, feed_dict={x: testData, y: testLabels, keep_prob: 1.}))
+		
+if __name__ == "__main__":
+    createModel()
+    

@@ -73,10 +73,10 @@ def loadData(fname):
                     print ("Error while loading data " + str(e))
 
     #save data and lables
-    with open("data", 'w') as f:
-        f.write(pickle.dumps(data.values()))
+    with open("data", 'wb') as f:
+        f.write(pickle.dumps(list(data.values())))
 
-    with open("labels", 'w') as f:
+    with open("labels", 'wb') as f:
         f.write(pickle.dumps(array(labels)))
     
     '''
