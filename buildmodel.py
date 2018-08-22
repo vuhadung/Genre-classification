@@ -172,7 +172,7 @@ def createModel():
             step += 1
         print("Optimization Finished!")
 
-        save_path = saver.save(sess, "model.final")
+        save_path = saver.save(sess, "..\Genre classification\model.final")
         print("Model saved in file: %s" % save_path)
 
         # Calculate accuracy
