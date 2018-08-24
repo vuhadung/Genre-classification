@@ -106,3 +106,7 @@ def loadData(fname):
     plt.title('t-SNE MFCC samples as genres')
     plt.show()
     '''
+
+if __name__ == "__main__":
+    loadData("..\Genre Classification")
+

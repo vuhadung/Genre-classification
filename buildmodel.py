@@ -55,7 +55,7 @@ def conv_net(_X, _weights, _biases, _dropout):
     dense1 = tf.nn.dropout(dense1, _dropout)  # Apply Dropout
 
     # Output, class prediction
-    out = tf.add(tf.matmul(dense1, _weights['out']), _biases['out'])
+    out = tf.add(tf.matmul(dense1, _weights['out']), _biases['out'], name="pred")
     return out
 
 
@@ -105,9 +105,9 @@ def createModel():
 
 
     # tf Graph input
-    x = tf.placeholder(tf.float32, [None, n_input])
-    y = tf.placeholder(tf.float32, [None, n_classes])
-    keep_prob = tf.placeholder(tf.float32)  # dropout (keep probability)
+    x = tf.placeholder(tf.float32, [None, n_input], name="x")
+    y = tf.placeholder(tf.float32, [None, n_classes], name="y")
+    keep_prob = tf.placeholder(tf.float32, name="keep_prob")  # dropout (keep probability)
 
 
     # Create model
